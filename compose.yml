@@ -1,0 +1,20 @@
+
+services:
+  ros-noetic-wslg:
+    container_name: ros-noetic-wslg  # コンテナ名
+    hostname: ros-noetic  # ホスト名
+    privileged: true  # 特権モードで実行
+    image: ros-noetic-wslg  # 使用するDockerイメージ
+    build: .  # Dockerfileのビルドコンテキスト
+
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix  # X11ソケットをホストからコンテナにマウント
+      - /mnt/wslg:/mnt/wslg  # WSLg関連のディレクトリをホストからコンテナにマウント
+      - /dev/:/dev/  # ホストのデバイスへのアクセスを許可
+
+    stdin_open: true
+    tty: true 
